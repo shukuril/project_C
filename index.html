@@ -3,32 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Меню Ресторана</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Меню ресторана</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 10px 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            color: #d35400;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Бургер-меню */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .burger-menu div {
+            width: 100%;
+            height: 5px;
+            background-color: #d35400;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav button {
+            padding: 10px 20px;
+            background-color: #d35400;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+        }
+
+        /* Стиль кнопки при наведении */
+        nav button:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        /* Стиль кнопки при нажатии */
+        nav button:active {
+            background-color: #e67e22;
+            transform: translateY(1px);
+        }
+
+        /* Стили для списка меню */
+        #menu {
+            width: 100%;
+            max-width: 1200px;
+            padding: 60px 20px;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr; /* Одно место по умолчанию для мобильных устройств */
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item img {
+            width: 100%;
+            border-radius: 8px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .menu-item h3 {
+            margin: 10px 0;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .menu-item p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .menu-item .price {
+            font-weight: bold;
+            color: #d35400;
+            font-size: 16px;
+        }
+
+        /* Адаптивные стили для мобильных устройств */
+        @media (max-width: 600px) {
+            #menu {
+                padding: 0 20px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+
+            nav {
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                width: 100%;
+                text-align: center;
+                background-color: #fff;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                display: flex; /* Показывать меню при активном состоянии */
+                max-height: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .menu-item {
+                flex: 1 0 calc(100% - 20px);
+            }
+        }
+
+        /* Стили для планшетов и больших экранов */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            #menu {
+                grid-template-columns: repeat(2, 1fr); /* Два столбца */
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            #menu {
+                grid-template-columns: repeat(3, 1fr); /* Три столбца */
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <header>
-        <h1>Меню Ресторана</h1>
-        <!-- Кнопка-гамбургер для скрывающегося меню -->
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
+        <h1>Меню ресторана</h1>
+        <div class="burger-menu" id="burgerMenu">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        <nav id="navbar">
-            <button onclick="filterMenu('all')">Все</button>
-            <button onclick="filterMenu('starters')">Закуски</button>
-            <button onclick="filterMenu('mains')">Основные блюда</button>
-            <button onclick="filterMenu('desserts')">Десерты</button>
-            <button onclick="filterMenu('drinks')">Напитки</button>
+        <nav id="navMenu">
+            <button data-category="Все">Все блюда</button>
+            <button data-category="Закуски">Закуски</button>
+            <button data-category="Основные блюда">Основные блюда</button>
+            <button data-category="Десерты">Десерты</button>
         </nav>
     </header>
 
-    <main id="menu">
-        <!-- Контейнер для меню, который будет динамически наполняться из JS -->
-    </main>
+    <div id="menu"></div>
 
-    <button id="backToTop" onclick="scrollToTop()">▲</button>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        const apiKey = 'AIzaSyDeOo61EC5FIspjDnUi4PKMpO6mr1nU5fU';
+        const spreadsheetId = '1DhLQiwq6Cg1Xh4LtnVWWJBzLmoGkqOvYCIoGE8I08y8';
+        const range = 'muffins!A2:E';
 
+        let menuData = []; // Переменная для хранения данных меню
 
-    <script src="script.js"></script>
+        function init() {
+            gapi.client.init({
+                apiKey: apiKey,
+                discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+            }).then(() => {
+                loadData();
+            });
+        }
+
+        function loadData() {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: spreadsheetId,
+                range: range,
+            }).then((response) => {
+                menuData = response.result.values; // Сохраняем данные в переменной
+                displayMenu(menuData);
+            }).catch((error) => {
+                console.error(error);
+                document.getElementById('menu').innerHTML = 'Ошибка загрузки данных.';
+            });
+        }
+
+        function displayMenu(data) {
+            const menuContainer = document.getElementById('menu');
+            menuContainer.innerHTML = '';
+            data.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.classList.add('menu-item');
+                menuItem.innerHTML = `
+                    <img src="${item[3]}" alt="${item[0]}" />
+                    <h3>${item[0]}</h3>
+                    <p>${item[1]}</p>
+                    <p class="price">${item[2]}</p>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+        }
+
+        // Функция фильтрации меню по категории
+        function filterMenu(category) {
+            if (category === 'Все') {
+                displayMenu(menuData); // Показать все блюда
+            } else {
+                const filteredData = menuData.filter(item => item[4] === category); // item[4] содержит категорию
+                displayMenu(filteredData);
+            }
+        }
+
+        // Добавляем обработчик клика для кнопок категорий
+        document.querySelectorAll('nav button').forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                filterMenu(category);
+            });
+        });
+
+        gapi.load('client', init);
+
+        // Открытие и закрытие бургер-меню
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
