@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню Ресторана</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Меню Ресторана</h1>
+        <!-- Кнопка-гамбургер для скрывающегося меню -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+        <nav id="navbar">
+            <button onclick="filterMenu('all')">Все</button>
+            <button onclick="filterMenu('starters')">Закуски</button>
+            <button onclick="filterMenu('mains')">Основные блюда</button>
+            <button onclick="filterMenu('desserts')">Десерты</button>
+            <button onclick="filterMenu('drinks')">Напитки</button>
+        </nav>
+    </header>
+
+    <main id="menu">
+        <!-- Контейнер для меню, который будет динамически наполняться из JS -->
+    </main>
+
+    <button id="backToTop" onclick="scrollToTop()">Наверх</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
