@@ -134,12 +134,12 @@ nav button:hover {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    padding: 10px 15px;
+    padding: 10px;
     background-color: #d35400;
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 24px; /* Увеличиваем размер значка */
     cursor: pointer;
     display: none;
     transition: background-color 0.3s, transform 0.2s;
@@ -150,6 +150,7 @@ nav button:hover {
     background-color: #e67e22;
     transform: scale(1.1);
 }
+
 
 /* Адаптивные стили для планшетов и компьютеров */
 /* Планшеты */
