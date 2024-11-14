@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Меню ресторана</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f8f8;
@@ -66,18 +67,27 @@
         .menu-item {
             background-color: white;
             margin: 10px;
-            padding: 20px;
+            padding: 20px 35px 30px 30px;
+            display: grid;
             width: 200px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
         }
 
         .menu-item img {
             width: 100%;
             height: auto;
+            border-radius: 8px;
         }
 
         .price {
+            margin: 0px;
             font-weight: bold;
             color: #333;
         }
@@ -89,6 +99,11 @@
             cursor: pointer;
             border: none;
             margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        .buy-icon:hover {
+            background-color: #218838;
         }
 
         .cart-overlay {
@@ -100,6 +115,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
+            transition: opacity 0.3s ease;
         }
 
         .cart-popup {
@@ -113,11 +129,13 @@
             width: 80%;
             max-width: 400px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
             z-index: 1000;
         }
 
         .cart-popup.active, .cart-overlay.active {
             display: block;
+            opacity: 1;
         }
 
         .cart-item {
@@ -125,6 +143,8 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
         }
 
         .cart-item img {
@@ -132,6 +152,7 @@
             height: 50px;
             object-fit: cover;
             margin-right: 10px;
+            border-radius: 4px;
         }
 
         .remove-icon {
@@ -151,6 +172,12 @@
             border: 1px solid #ddd;
             padding: 5px 10px;
             cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
         }
 
         .checkout-btn {
@@ -161,6 +188,7 @@
             width: 100%;
             margin-top: 20px;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .checkout-btn:hover {
@@ -170,10 +198,13 @@
         .total-price {
             font-weight: bold;
             margin-top: 10px;
+            text-align: right;
         }
+
     </style>
 </head>
 <body>
+
     <header>
         <h1>Меню ресторана</h1>
         <nav id="navMenu">
@@ -183,13 +214,15 @@
             <button data-category="Десерты">Десерты</button>
         </nav>
         <div class="cart" id="cartIcon">
-            <img src="https://image.flaticon.com/icons/png/512/1170/1170576.png" alt="Cart" class="cart-icon">
-            <span class="cart-count" id="cartCount">0</span>
+            <!-- Иконка корзины заменена на bi-cart-fill -->
+            <i class="bi bi-cart-fill">
+                <span class="cart-count" id="cartCount">0</span>
+            </i>
         </div>
     </header>
-
+    
     <div id="menu"></div>
-
+    
     <div class="cart-overlay" id="cartOverlay"></div>
     <div class="cart-popup" id="cartPopup">
         <h3>Корзина</h3>
@@ -197,6 +230,7 @@
         <p class="total-price">Общая сумма: <span id="totalPrice">0</span> ₽</p>
         <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
     </div>
+   
 
     <script src="https://apis.google.com/js/api.js"></script>
 
