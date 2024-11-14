@@ -200,6 +200,95 @@
             margin-top: 10px;
             text-align: right;
         }
+        
+        /* Медиа стили для мобильных устройств */
+        @media (max-width: 768px) {
+            .menu-item {
+                width: 100%;
+                margin: 5px 0;
+                padding: 10px;
+            }
+
+            .cart {
+                top: 15px;
+                right: 15px;
+            }
+
+            .cart-popup {
+                width: 90%;
+                max-width: 350px;
+                padding: 10px;
+            }
+
+            .buy-icon {
+                font-size: 18px;
+                padding: 8px;
+            }
+
+            .quantity-btn {
+                padding: 5px 8px;
+                font-size: 14px;
+            }
+
+            .cart-count {
+                font-size: 12px;
+                padding: 3px 7px;
+            }
+
+            #navMenu {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #navMenu button {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+            .menu-item {
+                width: 100%;
+                padding: 5px;
+            }
+
+            .cart {
+                top: 10px;
+                right: 10px;
+            }
+
+            .cart-popup {
+                width: 95%;
+                padding: 8px;
+            }
+
+            .total-price {
+                font-size: 16px;
+            }
+
+            .buy-icon {
+                font-size: 16px;
+                padding: 6px;
+            }
+
+            .quantity-btn {
+                padding: 4px 6px;
+                font-size: 12px;
+            }
+
+            .remove-icon {
+                font-size: 12px;
+            }
+
+            #navMenu button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
 
     </style>
 </head>
